@@ -1,4 +1,5 @@
 from flask import Flask, render_template, jsonify, request
+from config import Config, flask_app_config
 import json
 import os
 
@@ -30,6 +31,7 @@ scheduler.start()
 
 # Inizializza Flask
 app = Flask(__name__)
+app.config.from_object(Config)
 
 # Path del file JSON per salvare i dati dei turni
 DATA_FILE = "turni.json"
@@ -86,4 +88,4 @@ def stato_turni():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(**flask_app_config)
