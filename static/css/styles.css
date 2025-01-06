@@ -1,41 +1,84 @@
+/* Aggiungere un po' di padding e margini per migliorare l'aspetto */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 20px;
+    background-color: #f4f4f9;
+    color: #333;
 }
 
+/* Centrare il contenuto e dare un po' di spazio */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2em;
+    color: #007bff;
+}
+
+/* Migliorare la visualizzazione della tabella */
 table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    padding: 12px 15px;
     text-align: left;
+    border: 1px solid #ddd;
 }
 
+/* Evidenziare l'intestazione della tabella */
 th {
-    background-color: #f4f4f4;
-}
-
-.riposo {
-    background-color: #dff0d8;
-}
-
-.completato {
-    background-color: #dff0d8; /* Lo stesso colore del turno di riposo */
-}
-
-button {
-    padding: 5px 10px;
     background-color: #007bff;
     color: white;
+}
+
+/* Colore per i turni di riposo */
+.riposo {
+    background-color: #dff0d8;
+    font-weight: bold;
+}
+
+/* Colore per i turni completati */
+.completato {
+    background-color: #cce5ff;
+    font-weight: bold;
+}
+
+/* Miglioramento dei pulsanti */
+button {
+    padding: 8px 16px;
+    background-color: #28a745;
+    color: white;
     border: none;
-    border-radius: 3px;
+    border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
 }
 
 button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+    background-color: #218838;
+}
+
+/* Layout responsive: le tabelle e i pulsanti devono adattarsi a dispositivi mobili */
+@media (max-width: 768px) {
+    table {
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    button {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
 }
