@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turni di Pulizia</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <h1>Turni di Pulizia</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Compito</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for turno in turni %}
+            <tr class="{% if turno.compito == 'Riposo' %}riposo{% elif turno.completato %}completato{% endif %}">
+                <td>{{ turno.nome }}</td>
+                <td>{{ turno.compito }}</td>
+                <td>
+                    {% if turno.compito != 'Riposo' %}
+                    <button onclick="completaTurno({{ loop.index0 }})" {% if turno.completato %}disabled{% endif %}>Completa</button>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+    <button onclick="rotazioneTurni()">Ruota i turni</button>
+
+    <script>
+        function rotazioneTurni() {
+            fetch("/rotazione", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    location.reload();
+                } else {
+                    alert("Errore nella rotazione dei turni.");
+                }
+            });
+        }
+    </script>
+    
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
