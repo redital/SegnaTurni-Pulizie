@@ -38,10 +38,10 @@ DATA_FILE = "turni.json"
 
 # Dati di esempio iniziali
 DEFAULT_TURNI = [
-    {"nome": "Raffaello", "compito": "Bagno 1", "completato": False},
+    {"nome": "Raffaello", "compito": "Bagno Cacca", "completato": False},
     {"nome": "Ettore", "compito": "Cucina", "completato": False},
-    {"nome": "Pierclaudio", "compito": "Bagno 2", "completato": False},
-    {"nome": "Francesco", "compito": "Riposo", "completato": False}
+    {"nome": "Pierclaudio", "compito": "Riposo", "completato": False},
+    {"nome": "Francesco", "compito": "Bagno Doccia", "completato": False}
 ]
 
 # Funzione per caricare i turni dal file
