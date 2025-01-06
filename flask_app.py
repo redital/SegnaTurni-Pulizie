@@ -2,6 +2,33 @@ from flask import Flask, render_template, jsonify, request
 import json
 import os
 
+from apscheduler.schedulers.background import BackgroundScheduler
+
+def rotazione_turni():
+    turni = carica_turni()
+
+    # Impostiamo tutti i turni come non completati prima di ruotarli
+    for turno in turni:
+        turno['completato'] = False
+
+    # Estraiamo i compiti
+    compiti = [turno['compito'] for turno in turni]
+
+    # Ruotiamo i compiti (compreso "Riposo")
+    compiti = compiti[1:] + [compiti[0]]  # Ruotiamo la lista dei compiti
+
+    # Riassegniamo i compiti alle persone (i nomi rimangono fermi)
+    for i, turno in enumerate(turni):
+        turno['compito'] = compiti[i]
+
+    salva_turni(turni)
+
+# Configurazione di APScheduler
+scheduler = BackgroundScheduler()
+scheduler.add_job(rotazione_turni, 'cron', day_of_week='sat', hour=0, minute=0)
+scheduler.start()
+
+# Inizializza Flask
 app = Flask(__name__)
 
 # Path del file JSON per salvare i dati dei turni
@@ -48,22 +75,14 @@ def completa_turno():
 
 
 @app.route("/rotazione", methods=["POST"])
-def rotazione_turni():
-    turni = carica_turni()
-
-    # Estraiamo i compiti
-    compiti = [turno['compito'] for turno in turni]
-
-    # Ruotiamo i compiti (compreso "Riposo")
-    compiti = compiti[1:] + [compiti[0]]  # Ruotiamo la lista dei compiti
-
-    # Riassegniamo i compiti alle persone (i nomi rimangono fermi)
-    for i, turno in enumerate(turni):
-        turno['compito'] = compiti[i]
-
-    salva_turni(turni)
+def rotazione_manuale():
+    rotazione_turni()
     return jsonify({"success": True})
 
+@app.route("/stato_turni", methods=["GET"])
+def stato_turni():
+    turni = carica_turni()  # Carica i turni dal file
+    return jsonify(turni)  # Restituisce i turni come JSON
 
 
 if __name__ == "__main__":
