@@ -3,7 +3,6 @@ version: '3.8'
 services:
   segnaturni-pulizie:
     container_name: segnaturni-pulizie
-    build: .
     environment:
       - FLASK_APP=app.py
       - FLASK_DEBUG=${FLASK_DEBUG:-True}
@@ -12,4 +11,6 @@ services:
       - SECRET_KEY=${SECRET_KEY:-mysecretkey}
     ports:
       - "8145:${FLASK_PORT}"
+    restart: unless-stopped
+    build: .
     pull_policy: build
