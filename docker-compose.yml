@@ -4,6 +4,8 @@ services:
   segnaturni-pulizie:
     container_name: segnaturni-pulizie
     environment:
+      - PYTHONUNBUFFERED=1
+
       - FLASK_APP=app.py
       - FLASK_DEBUG=${FLASK_DEBUG:-True}
       - FLASK_HOST=${FLASK_HOST:-0.0.0.0}
