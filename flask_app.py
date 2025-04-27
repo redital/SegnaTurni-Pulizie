@@ -24,10 +24,10 @@ def rotazione_turni():
     for i, turno in enumerate(turni):
         turno['compito'] = compiti[i]
         
-    print("avvio rotazione turni")
+    print("fine rotazione turni")
 
     salva_turni(turni)
-    
+
     print(turni)
 
 # Configurazione di APScheduler
@@ -84,6 +84,7 @@ def completa_turno():
 
 @app.route("/rotazione", methods=["POST"])
 def rotazione_manuale():
+    print("avvio rotazione manuale")
     rotazione_turni()
     return jsonify({"success": True})
 
