@@ -95,4 +95,5 @@ def stato_turni():
 
 
 if __name__ == "__main__":
+    flask_app_config.update({"use_reloader": False})
     app.run(**flask_app_config)
