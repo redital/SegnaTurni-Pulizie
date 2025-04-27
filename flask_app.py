@@ -31,9 +31,10 @@ def rotazione_turni():
     print(turni)
 
 # Configurazione di APScheduler
-scheduler = BackgroundScheduler()
-scheduler.add_job(rotazione_turni, 'interval', minutes=2)
-scheduler.start()
+def start_scheduler():
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(rotazione_turni, 'interval', minutes=2)
+    scheduler.start()
 
 # Inizializza Flask
 app = Flask(__name__)
@@ -95,5 +96,6 @@ def stato_turni():
 
 
 if __name__ == "__main__":
+    start_scheduler()
     flask_app_config.update({"use_reloader": False})
     app.run(**flask_app_config)
