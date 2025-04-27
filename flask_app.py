@@ -6,7 +6,9 @@ import os
 from apscheduler.schedulers.background import BackgroundScheduler
 
 def rotazione_turni():
+    print("avvio rotazione turni")
     turni = carica_turni()
+    print(turni)
 
     # Impostiamo tutti i turni come non completati prima di ruotarli
     for turno in turni:
@@ -21,8 +23,12 @@ def rotazione_turni():
     # Riassegniamo i compiti alle persone (i nomi rimangono fermi)
     for i, turno in enumerate(turni):
         turno['compito'] = compiti[i]
+        
+    print("avvio rotazione turni")
 
     salva_turni(turni)
+    
+    print(turni)
 
 # Configurazione di APScheduler
 scheduler = BackgroundScheduler()
