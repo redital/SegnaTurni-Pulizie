@@ -33,7 +33,7 @@ def rotazione_turni():
 # Configurazione di APScheduler
 def start_scheduler():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(rotazione_turni, 'interval', minutes=2)
+    scheduler.add_job(rotazione_turni, 'cron', day_of_week='sat', hour=0, minute=0)
     scheduler.start()
 
 # Inizializza Flask
