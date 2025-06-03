@@ -94,6 +94,10 @@ def stato_turni():
     turni = carica_turni()  # Carica i turni dal file
     return jsonify(turni)  # Restituisce i turni come JSON
 
+@app.route("/tg24")
+def index():
+    return render_template("tg24.html")
+
 
 if __name__ == "__main__":
     start_scheduler()
