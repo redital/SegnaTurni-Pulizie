@@ -95,7 +95,7 @@ def stato_turni():
     return jsonify(turni)  # Restituisce i turni come JSON
 
 @app.route("/tg24")
-def index():
+def diretta_tg():
     return render_template("tg24.html")
 
 
